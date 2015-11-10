@@ -1,7 +1,7 @@
 class Cereals
 {
   String name;
-  float calories
+  float calories;
   float protein;
   float fat;
   float sodium;
