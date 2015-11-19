@@ -1,12 +1,14 @@
-ArrayList<Cereals> clist = new ArrayList<Cereals>();
-float[] menunumbers = new float[4];
-boolean menu;
+ArrayList<Cereals> clist = new ArrayList<Cereals>(); // array for classe
+float[] menunumbers = new float[4]; // array for menu items
+boolean menu; // variable for checking if we are at the menu
 
+// variables for menu items
   int one=1;
   int two=2;
   int graph=3;
   int readme=4;
 
+// variables for drawing the box and star
 float x,y,z;
 int segments = 12;
 float cx , cy;
@@ -18,8 +20,9 @@ void setup()
   size(600,600,P3D);
   background(0);
   loaddata();
-  menu = true;
- 
+  menu = false;
+
+ //initializing varibales for the menu
   one=1;
   two=2;
   graph=3;
@@ -82,7 +85,7 @@ void loaddata()
   }
 }
     
-<<<<<<< HEAD
+
   
  void mousePressed()
  {
@@ -97,7 +100,7 @@ void loaddata()
    }
    
  }
-=======
+
 void drawbox()
 {
   fill(255);
@@ -151,4 +154,3 @@ void drawstar()
   popMatrix();
 }
  
->>>>>>> new_branch
