@@ -23,15 +23,17 @@ boolean callreadme;
 boolean callgraph;
 boolean chose;
 
+//varibale for the number choosen in the box option
 int cerealnumber;
+
+
 void setup()
 {
 
   size(600, 600, P3D);
   background(0);
   loaddata();
-  menu = true
-    ;
+  menu = true;
 
   //initializing varibales for the menu
   one=1;
@@ -46,18 +48,13 @@ void setup()
   callreadme = false;
   chose = false;
   
-  println(clist.get(3).name);
-  println(clist.get(3).fiber);
-  println(clist.get(3).sugar);
-  println(clist.get(3).fat);
-  println(clist.get(3).protein);
-  println(clist.get(3).carbs);
+ 
 }
 
 void draw()
 {
   
-  
+  //calling the choosen function or the menu function
   if (menu)
   {
     loadmenu();
@@ -66,13 +63,13 @@ void draw()
   {
     if (callsinglebox)
     {
-      if(chose)
+      if(chose)//if a cerel is choosen
       {
-        drawstar();
-        
-        Cereals c = new Cereals(clist.get(cerealnumber));
+        drawstar();//drawing the background star
+        Cereals c = new Cereals(clist.get(cerealnumber));//calling the constructor in c that makes the box
         
         //code to make the exit box
+        stroke(255);
         fill(86);
         rect(width-20, 0, 20, 20);
         line(width-20,0,width,20);
@@ -81,19 +78,46 @@ void draw()
        else
       {
         showcereals();
+        
+        //code to make the exit box
+        stroke(255);
+        fill(86);
+        rect(width-20, 0, 20, 20);
+        line(width-20,0,width,20);
+        line(width,0,width-20,20); 
       }
     }
     else if (calldoublebox)
     {
       drawsugargraph();
+      
+      //code to make the exit box
+        stroke(255);
+        fill(86);
+        rect(width-20, 0, 20, 20);
+        line(width-20,0,width,20);
+        line(width,0,width-20,20); 
     }
     else if (callreadme)
     {
       drawreadme();
+      
+      //code to make the exit box
+        stroke(255);
+        fill(86);
+        rect(width-20, 0, 20, 20);
+        line(width-20,0,width,20);
+        line(width,0,width-20,20); 
     }
     else if (callgraph)
     {
       drawgraph();
+      
+      //code to make the exit box
+        fill(86);
+        rect(width-20, 0, 20, 20);
+        line(width-20,0,width,20);
+        line(width,0,width-20,20); 
     }
      
   }
@@ -191,7 +215,7 @@ void mousePressed()
   translate(height/2, width/2);
   if (menu)
   {
-
+    //calling the functions according to the option selected
     if ( dist(mouseX, mouseY, height/2, width/2) < 90 )
     {
       if (menunumbers[one%4] == 0)
@@ -211,13 +235,13 @@ void mousePressed()
       {
         menu=!menu;
         callreadme = !callreadme;
-        println(callreadme);
+        
       }
       else if (menunumbers[graph%4] == 0)
       {
         menu=!menu;
         callgraph = !callgraph;
-        println(callreadme);
+       
       }
       
     }//end of in the circle if
@@ -231,6 +255,8 @@ void mousePressed()
       readme++;
     }
   }//end of if in menu if 
+  
+  //code for the exit box in all the options
   else
   {
     if (mouseX > (width-20) && mouseY < 20)
@@ -331,17 +357,7 @@ void drawgraph()
     int i =(int) map(mouseX, border, width-border, 0, clist.size() );
     text(clist.get(i).name + "\n potassium : " + clist.get(i).potassium ,width/2, border*2);
   }
-  
-    
-  
-  
-  
-  //code to make the exit box
-  fill(86);
-  stroke(0);
-  rect(width-20, 0, 20, 20);
-  line(width-20,0,width,20);
-  line(width,0,width-20,20);
+ 
 }
 
 //function to show the readme option
@@ -369,14 +385,10 @@ void drawreadme()
   text("the graph shows the average sugar intake for different countries over \na number of years",20,9 *(height/10) );
   
   
-  //code to make the exit box 
-  fill(86);
-  rect(width-20, 0, 20, 20);
-  line(width-20,0,width,20);
-  line(width,0,width-20,20);
+ 
 }
 
-
+//function to show the cereal options to choose from
 void showcereals()
 {
    background(0);
@@ -403,13 +415,13 @@ void showcereals()
     if(key == '0' || key == '1' || key == '2' || key == '3' || key == '4' || key == '5' || key == '6' || key == '7' || key == '8' || key == '9')
     {
       cerealnumber =  (char(key))%48;
-      println(cerealnumber);
       chose = true;
     } 
   }
      
 }
 
+//function to draw the sugar compared to a banana graph
 void drawsugargraph()
 {
   float max = 0.0f;
@@ -429,6 +441,7 @@ void drawsugargraph()
   
   float min = max;
   
+  //finding the minmum sugar amount 
   for(Sugar b : slist)
   {
     if( b.us<min )
@@ -445,7 +458,6 @@ void drawsugargraph()
    
    int minint = (int)min;
    int maxint = (int)max + 1;
-   println(maxint);
    background(0);
   float border = 40;
   stroke(255);
@@ -464,20 +476,10 @@ void drawsugargraph()
     pos-=dist;
   } 
   
-  
- /*pos = border;
-  dist = map(1,0,(int)slist.get(43).year - (int)slist.get(0).year, 0, hlinesize);
-  println(dist);
-  textSize(6);
-  for( int i=0; i < slist.size()  ; ++i)
-  {
-    
-    line(pos,height-border,pos,height-border+10);
-    text((int)slist.get(i).year,pos,height-5);
-    pos+=dist;
-  }*/
   min-=2;
   max+=5;
+  
+  //graphs for each country
    for (int i = 1 ; i < slist.size() ; i ++)
   {
     stroke(0, 255, 255);
@@ -528,6 +530,7 @@ void drawsugargraph()
     line(x1, y1, x2, y2);
   }
   
+  //making the line
   if( mouseX > border && mouseX < width-border )
   {
     stroke(255,0,0);
@@ -550,8 +553,6 @@ void drawsugargraph()
   fill(0,255,0);
   text("CANADA :" + ((int)slist.get(i).canada),width/8,(height/10)*1.5 + 80);
   
-}
-
-  
+  }
 
 }
